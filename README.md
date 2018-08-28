@@ -1,5 +1,9 @@
 # spark-structured-streaming-on-iae-to-cos
 
+Edit the following with your Message Hub and Cloud Object Storage credentials, and paste into a terminal running on IBM Analytics Engine 1.1.
+
+Better documentation to follow ...
+
 ```
 
 cat << EOF > jaas.conf
@@ -77,11 +81,5 @@ dataDf.
   option("checkpointLocation", s"${s3Url}/checkpoint").
   option("path",               s"${s3Url}/data").
   start()
-
-
-//////////
-
-// TODO: https://github.com/polomarcus/Spark-Structured-Streaming-Examples/blob/master/src/main/scala/cassandra/StreamSinkProvider/CassandraSink.scala
-
 
 ```
