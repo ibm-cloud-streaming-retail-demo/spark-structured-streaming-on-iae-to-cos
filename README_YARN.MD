@@ -1,4 +1,4 @@
-Build the scala class and package to jar
+Build the scala class and package to jar and cooy it to IAE!
 
 ```
 sbt package
