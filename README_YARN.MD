@@ -16,11 +16,14 @@ EOF
 
 ```
 cat << EOF > config_vars.sh
+
+# S3 #
 S3_ACCESSKEY=CHANGEME
 S3_SECRETKEY=CHANGEME
 S3_PRIVATE_ENDPOINT=CHANGEME # E.g. s3.eu-geo.objectstorage.service.networklayer.com
 S3_BUCKET=CHANGEME
 
+# KAFKA #
 KAFKA_BOOTSTRAP_SERVERS=HOST1:PORT1,HOST2:PORT2,... # E.g. kafka03-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka04-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka01-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka02-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka05-prod01.messagehub.services.eu-de.bluemix.net:9093
 
 EOF
