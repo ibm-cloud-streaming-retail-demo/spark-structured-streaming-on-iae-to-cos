@@ -55,3 +55,31 @@ chmod +x start_yarn_client.sh
 ```
 bash -x start_yarn_client.sh
 ```
+
+```
+cat << 'EOF' > start_yarn_cluster.sh
+source config_vars.sh
+
+spark-submit --class main.Main \
+       --master yarn \
+       --deploy-mode client \
+       --files jaas.conf \
+       --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.0 \
+       --conf "spark.driver.extraJavaOptions=-Djava.security.auth.login.config=jaas.conf" \
+       --conf "spark.executor.extraJavaOptions=-Djava.security.auth.login.config=jaas.conf" \
+       --conf spark.s3_accesskey=$S3_ACCESSKEY \
+       --conf spark.s3_secretkey=$S3_SECRETKEY \
+       --conf spark.s3_endpoint=$S3_PRIVATE_ENDPOINT \
+       --conf spark.s3_bucket=$S3_BUCKET \
+       --conf spark.kafka_bootstrap_servers=$KAFKA_BOOTSTRAP_SERVERS \
+       --conf spark.yarn.submit.waitAppCompletion=false \
+       --num-executors 1 \
+       --executor-cores 1 \
+       spark-structured-streaming-on-iae-to-cos_2.11-1.0.jar
+EOF
+chmod +x start_yarn_cluster.sh
+```
+
+```
+bash -x start_yarn_cluster.sh
+```
