@@ -21,10 +21,7 @@ object Main {
 
     import spark.implicits._
 
-    val accessKey = "CHANGEME"
-    val secretKey = "CHANGEME"
-    val bucketName = "CHANGEME"
-    val endpoint = "s3.eu-geo.objectstorage.service.networklayer.com" // probably CHANGEME
+    val bucketName = conf.get("spark.s3_bucket")
 
     // arbitrary name for refering to the cos settings from this code
     val serviceName = "myservicename"
@@ -32,9 +29,9 @@ object Main {
     val sc = spark.sparkContext
 
     sc.hadoopConfiguration.set("fs.s3.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem");
-    sc.hadoopConfiguration.set("fs.s3a.access.key", accessKey)
-    sc.hadoopConfiguration.set("fs.s3a.secret.key", secretKey)
-    sc.hadoopConfiguration.set("fs.s3a.endpoint", endpoint)
+    sc.hadoopConfiguration.set("fs.s3a.access.key", conf.get("spark.s3_accesskey"))
+    sc.hadoopConfiguration.set("fs.s3a.secret.key", conf.get("spark.s3_secretkey"))
+    sc.hadoopConfiguration.set("fs.s3a.endpoint", conf.get("spark.s3_endpoint"))
 
     val s3Url = s"s3a://${bucketName}/"
 
@@ -54,8 +51,7 @@ object Main {
 
     val df = spark.readStream.
       format("kafka").
-      // v- probably CHANGEME -v
-      option("kafka.bootstrap.servers", "kafka03-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka04-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka01-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka02-prod01.messagehub.services.eu-de.bluemix.net:9093,kafka05-prod01.messagehub.services.eu-de.bluemix.net:9093").
+      option("kafka.bootstrap.servers", conf.get("spark.kafka_bootstrap_servers")).
       option("subscribe", "transactions_load").
       option("kafka.security.protocol", "SASL_SSL").
       option("kafka.sasl.mechanism", "PLAIN").
