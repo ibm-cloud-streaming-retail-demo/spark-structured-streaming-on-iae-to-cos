@@ -83,3 +83,7 @@ chmod +x start_yarn_cluster.sh
 ```
 bash -x start_yarn_cluster.sh
 ```
+
+```
+yarn application -list
+```
