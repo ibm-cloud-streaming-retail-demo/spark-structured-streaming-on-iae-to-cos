@@ -62,7 +62,7 @@ source config_vars.sh
 
 spark-submit --class main.Main \
        --master yarn \
-       --deploy-mode client \
+       --deploy-mode cluster \
        --files jaas.conf \
        --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.0 \
        --conf "spark.driver.extraJavaOptions=-Djava.security.auth.login.config=jaas.conf" \
