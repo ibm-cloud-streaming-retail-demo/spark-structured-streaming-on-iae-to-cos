@@ -28,5 +28,5 @@ LOCATION 's3a://streamingdata/data/';
 ```
 
 ```
-select * from invoiceitems limit 5;
+select * from invoiceitems where invoiceno is not null limit 5;
 ```
