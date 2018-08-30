@@ -2,7 +2,6 @@ package main
 
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
-import scala.concurrent.duration._
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.streaming.Trigger
