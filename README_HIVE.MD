@@ -14,7 +14,7 @@ CREATE EXTERNAL TABLE invoiceitems (
   StockCode INT,
   Description STRING,
   Quantity INT,
-  InvoiceDate INT,
+  InvoiceDate BIGINT,
   UnitPrice DOUBLE,
   CustomerID INT,
   Country STRING,
@@ -24,7 +24,7 @@ CREATE EXTERNAL TABLE invoiceitems (
   TransactionID String
 )
 ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
-LOCATION 's3a://streamingdata/data/*';
+LOCATION 's3a://streamingdata/data/';
 ```
 
 ```
