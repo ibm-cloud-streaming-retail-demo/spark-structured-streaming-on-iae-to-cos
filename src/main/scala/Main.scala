@@ -63,10 +63,12 @@ object Main {
       select( from_json($"json", schema=schema).as("data")).
       select("data.*")
 
+    val trigger_time_ms = conf.get("spark.trigger_time_ms").toInt
+
     dataDf.
       writeStream.
       format("json").
-      trigger(Trigger.ProcessingTime(30.seconds)).
+      trigger(Trigger.ProcessingTime(trigger_time_ms)).
       option("checkpointLocation", s"${s3Url}/checkpoint").
       option("path",               s"${s3Url}/data").
       start()

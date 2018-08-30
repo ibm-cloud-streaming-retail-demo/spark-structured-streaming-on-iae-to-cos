@@ -53,6 +53,7 @@ spark-submit --class main.Main \
        --conf spark.s3_endpoint=$S3_PRIVATE_ENDPOINT \
        --conf spark.s3_bucket=$S3_BUCKET \
        --conf spark.kafka_bootstrap_servers=$KAFKA_BOOTSTRAP_SERVERS \
+       --conf spark.trigger_time_ms=30000 \
        --num-executors 1 \
        --executor-cores 1 \
        spark-structured-streaming-on-iae-to-cos_2.11-1.0.jar
@@ -85,6 +86,7 @@ spark-submit --class main.Main \
        --conf spark.s3_bucket=$S3_BUCKET \
        --conf spark.kafka_bootstrap_servers=$KAFKA_BOOTSTRAP_SERVERS \
        --conf spark.yarn.submit.waitAppCompletion=false \
+       --conf spark.trigger_time_ms=600000 \
        --num-executors 1 \
        --executor-cores 1 \
        spark-structured-streaming-on-iae-to-cos_2.11-1.0.jar
