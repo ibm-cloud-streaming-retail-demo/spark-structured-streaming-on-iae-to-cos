@@ -1,4 +1,4 @@
-First, configure IAE to work with COS [[docs](https://console.bluemix.net/docs/services/AnalyticsEngine/configure-COS-S3-object-storage.html#configuring-clusters-to-work-with-ibm-cos-s3-object-stores)], for the core-site properties add:
+First, configure IAE to work with COS [[docs](https://console.bluemix.net/docs/services/AnalyticsEngine/configure-COS-S3-object-storage.html#configuring-clusters-to-work-with-ibm-cos-s3-object-stores)], where the docs describe changing the core-site properties use:
 
 ```
 fs.s3a.access.key=CHANGEME
