@@ -6,7 +6,7 @@ fs.s3a.secret.key=CHANGEME
 fs.s3a.endpoint=CHANGEME
 ```
 
-Now use the hive ...
+Now use the hive (replace CHANGEME with your bucket name) ...
 
 ```
 CREATE EXTERNAL TABLE invoiceitems (
@@ -21,10 +21,10 @@ CREATE EXTERNAL TABLE invoiceitems (
   LineNo INT,
   InvoiceTime STRING,
   StoreID INT,
-  TransactionID String
+  TransactionID STRING
 )
 ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
-LOCATION 's3a://streamingdata/data/';
+LOCATION 's3a://CHANGEME/data/'; 
 ```
 
 ```
