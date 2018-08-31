@@ -30,3 +30,9 @@ LOCATION 's3a://streamingdata/data/';
 ```
 select * from invoiceitems where invoiceno is not null limit 5;
 ```
+
+To check load status without having to login to an ssh session each time, use [ssh-copy-id](https://www.ssh.com/ssh/copy-id) to copy your ssh public key to the cluster and then run:
+
+```
+ssh clsadmin@yourcluster "hive -e 'select count(*) from invoiceitems'"
+```
