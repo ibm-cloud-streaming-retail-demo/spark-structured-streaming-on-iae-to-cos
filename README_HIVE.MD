@@ -43,4 +43,7 @@ Count the number of transactions in the last hour (TODO invoicedate and unix_tim
 ssh clsadmin@yourcluster "hive -e 'select count(*) from invoiceitems where invoicedate > (unix_timestamp() - 3600)*1000'"
 ```
 
-invoicedate is in milliseconds whereas unix_timestamp is seconds, so we needed to convert the unix_timestamp to milliseconds (*1000)
+NOTE:
+
+- invoicedate is in milliseconds whereas unix_timestamp is seconds, so we needed to convert the unix_timestamp to milliseconds (*1000)
+- the [Yarn Cluster job](./README_YARN.MD) by default saves a new batch of data every 10 minutes
