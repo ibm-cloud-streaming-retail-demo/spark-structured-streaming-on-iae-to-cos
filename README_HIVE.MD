@@ -36,3 +36,10 @@ To check load status without having to login to an ssh session each time, use [s
 ```
 ssh clsadmin@yourcluster "hive -e 'select count(*) from invoiceitems'"
 ```
+
+Count the number of transactions in the last hour (TODO invoicedate and unix_timestamp should both be UTC)
+
+```
+ssh clsadmin@yourclustert "hive -e 'select count(*) from invoiceitems where invoicedate > unix_timestamp() - 3600'"
+
+```
