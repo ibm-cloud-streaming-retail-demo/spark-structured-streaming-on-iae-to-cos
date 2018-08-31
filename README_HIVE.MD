@@ -46,4 +46,4 @@ ssh clsadmin@yourcluster "hive -e 'select count(*) from invoiceitems where invoi
 NOTE:
 
 - invoicedate is in milliseconds whereas unix_timestamp is seconds, so we needed to convert the unix_timestamp to milliseconds (*1000)
-- the [Yarn Cluster job](./README_YARN.MD) by default saves a new batch of data every 10 minutes
+- the [Yarn Cluster job](./README_YARN.MD) by default saves a new batch of data every 10 minutes (--conf spark.trigger_time_ms=600000)
