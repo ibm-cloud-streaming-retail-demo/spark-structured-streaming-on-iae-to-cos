@@ -43,4 +43,4 @@ Count the number of transactions in the last hour (TODO invoicedate and unix_tim
 ssh clsadmin@yourcluster "hive -e 'select count(*) from invoiceitems where invoicedate > (unix_timestamp() - 3600)*1000'"
 ```
 
-invoicedate is in milliseconds whereas unix_timestamp is seconds, so we need to convert the unix_timestamp to milliseconds
+invoicedate is in milliseconds whereas unix_timestamp is seconds, so we needed to convert the unix_timestamp to milliseconds (*1000)
