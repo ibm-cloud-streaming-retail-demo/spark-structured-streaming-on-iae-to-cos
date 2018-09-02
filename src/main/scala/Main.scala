@@ -60,16 +60,23 @@ object Main {
 
     val dataDf = df.selectExpr("CAST(value AS STRING) as json").
       select( from_json($"json", schema=schema).as("data")).
-      select("data.*")
+      select("data.*").
+      filter($"InvoiceNo".isNotNull).
+      withColumn("InvoiceDateString", from_unixtime($"InvoiceDate" / 1000)).
+      withColumn("InvoiceYear", year(from_unixtime($"InvoiceDate"/ 1000))).
+      withColumn("InvoiceMonth", month(from_unixtime($"InvoiceDate" / 1000))).
+      withColumn("InvoiceDay", dayofmonth(from_unixtime($"InvoiceDate" / 1000))).
+      withColumn("InvoiceHour", hour(from_unixtime($"InvoiceDate" / 1000)))
 
     val trigger_time_ms = conf.get("spark.trigger_time_ms").toInt
 
     dataDf.
       writeStream.
-      format("json").
+      format("parquet").
       trigger(Trigger.ProcessingTime(trigger_time_ms)).
       option("checkpointLocation", s"${s3Url}/checkpoint").
       option("path",               s"${s3Url}/data").
+      partitionBy("InvoiceYear", "InvoiceMonth", "InvoiceDay", "InvoiceHour").
       start()
 
     //Wait for all streams to finish
